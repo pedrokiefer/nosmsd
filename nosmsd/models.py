@@ -9,7 +9,7 @@ from nosmsd.smsd_errors import ERROR_MESSAGES
 
 class MultipartManager(models.Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return super(MultipartManager, self).get_query_set() \
                                             .filter(sequenceposition=1)
 
@@ -51,19 +51,19 @@ class OnlySinglepartInboxQuerySet(CustomQuerySet):
 
 class InboxMultipartManager(models.Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return GroupedInboxQuerySet(self.model, using=self._db)
 
 
 class InboxMultipartMessagesManager(models.Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return OnlyMultipartInboxQuerySet(self.model, using=self._db)
 
 
 class InboxSinglepartMessagesManager(models.Manager):
 
-    def get_query_set(self):
+    def get_queryset(self):
         return OnlySinglepartInboxQuerySet(self.model, using=self._db)
 
 
